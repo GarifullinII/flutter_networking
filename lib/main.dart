@@ -38,8 +38,10 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 Future<http.Response> getData() async {
-  const url = 'https://about.google/static/data/locations.json';
-  return await http.get(Uri.parse(url));
+  const url = 'https://api.coindesk.com/v1/bpi/currentprice.json';
+  return await http.get(
+    Uri.parse(url),
+  );
   // ответ с типом Response в виде объекта Future
   // метод синхронный, добавляю await - асинхронный
 }
