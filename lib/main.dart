@@ -41,6 +41,9 @@ Future<http.Response> getData() async {
   const url = 'https://api.coindesk.com/v1/bpi/currentprice.json';
   return await http.get(
     Uri.parse(url),
+    // headers: {
+    //   "Access-Control-Allow-Origin": 'true',
+    // },
   );
   // ответ с типом Response в виде объекта Future
   // метод синхронный, добавляю await - асинхронный
