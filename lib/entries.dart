@@ -1,21 +1,21 @@
 import 'dart:convert';
-
+import 'package:json_annotation/json_annotation.dart';
 import 'package:http/http.dart' as http;
 
+part 'entries.g.dart';
+
+@JsonSerializable()
 class EntriesList {
   List<Entry> entries;
   EntriesList({required this.entries});
 
-  factory EntriesList.fromJson(Map<String, dynamic> json) {
-    var EntriesJson = json['entries'] as List;
+  factory EntriesList.fromJson(Map<String, dynamic> json) =>
+      _$EntriesListFromJson(json);
 
-    List<Entry> entriesList =
-        EntriesJson.map((i) => Entry.fromJson(i)).toList();
-
-    return EntriesList(entries: entriesList);
-  }
+  Map<String, dynamic> toJson() => _$EntriesListToJson(this);
 }
 
+@JsonSerializable()
 class Entry {
   final String? title;
   final String? key;
@@ -23,12 +23,9 @@ class Entry {
 
   Entry({this.title, this.key, this.revision});
 
-  factory Entry.fromJson(Map<String, dynamic> json) {
-    return Entry(
-        title: json['title'] as String,
-        key: json['key'] as String,
-        revision: json['revision'] as num);
-  }
+  factory Entry.fromJson(Map<String, dynamic> json) => _$EntryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EntryToJson(this);
 }
 
 Future<EntriesList> getEntriesList() async {
